@@ -6,7 +6,7 @@
 /*   By:  <>                                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/20 15:27:20 by                   #+#    #+#             */
-/*   Updated: 2015/12/20 16:40:10 by                  ###   ########.fr       */
+/*   Updated: 2015/12/20 18:24:19 by                  ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,12 @@ t_uint				list_size(t_double_list *lst)
 
 void				print_list(t_double_list *lst)
 {
-	while (lst)
+	while (lst->next)
+		lst = lst->next;
+	while (lst && lst->value != 0)
 	{
 		ft_putnbr(lst->value);
 		ft_putendl("");
-		lst = lst->next;
+		lst = lst->prev;
 	}
 }

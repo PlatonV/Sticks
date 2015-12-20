@@ -6,7 +6,7 @@
 /*   By:  <>                                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/20 15:27:20 by                   #+#    #+#             */
-/*   Updated: 2015/12/20 18:24:19 by                  ###   ########.fr       */
+/*   Updated: 2015/12/20 19:33:45 by                  ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ t_uint				list_size(t_double_list *lst)
 		result++;
 		lst = lst->next;
 	}
-	return (0);
+	return (result);
 }
 
 void				print_list(t_double_list *lst)

@@ -6,7 +6,7 @@
 /*   By:  <>                                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/20 15:05:02 by                   #+#    #+#             */
-/*   Updated: 2015/12/20 18:03:09 by                  ###   ########.fr       */
+/*   Updated: 2015/12/20 19:29:24 by                  ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <fcntl.h>
 # include <stdlib.h>
+# include <stdio.h>
 # include "libft.h"
 # include "get_next_line.h"
 
@@ -28,11 +29,13 @@ typedef struct				s_double_list
 }							t_double_list;
 
 long						g_count;
-unsigned char				*g_intent;
+char						*g_intent;
 
 t_double_list				*create_node(int value);
 void						append_node(t_double_list **lst, int value);
 t_uint						list_size(t_double_list *lst);
 void						print_list(t_double_list *lst);
+void						init(t_double_list *lst);
+void						gen_intent(t_double_list *lst);
 
 #endif

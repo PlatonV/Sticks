@@ -6,11 +6,13 @@
 /*   By:  <>                                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/20 15:03:30 by                   #+#    #+#             */
-/*   Updated: 2015/12/20 18:41:58 by                  ###   ########.fr       */
+/*   Updated: 2015/12/20 21:42:59 by                  ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "alum.h"
+
+int					g_index;
 
 t_double_list		*read_list(int fd)
 {
@@ -30,23 +32,30 @@ t_double_list		*read_list(int fd)
 
 int					calculate_choice(t_double_list *lst)
 {
-	int		index;
+	int		choice;
 
-	index = 0;
-	while (lst->next)
+	if (!g_intent[g_index])
 	{
-		lst = lst->next;
-		index++;
+		ft_putendl("I dont want to finish ");
+		choice = lst->value % 4 - 1;
+		if (choice == -1)
+			return (3);
+		if (choice == 0)
+			return (1);
 	}
-	if (!g_intent[index])
-		return (lst->value % 4);
 	else
-		return (lst->value % 4 - 1 > 0 ? lst->value % 4 - 1 : 1);
+	{
+		ft_putendl("I want to finish ");
+		choice = lst->value % 4;
+		if (choice == 0)
+			return (1);
+	}
+	return (choice);
 }
 
 void				player_move(t_double_list *lst)
 {
-	int		choice;
+	int			choice;
 	char		*answer;
 
 	get_next_line(1, &answer);
@@ -67,17 +76,23 @@ void				my_move(t_double_list *lst)
 
 void				run_game(t_double_list *lst)
 {
-	while (lst->next)
+	while (lst->value)
 	{
 		ft_putendl("--------------------------------------");
 		print_list(lst);
 		ft_putendl("How many sticks do you want to remove?");
 		player_move(lst);
-		if (lst->value == 0)
+		if (lst->value == 0 && lst->next)
+		{
 			lst = lst->next;
+			g_index++;
+		}
 		my_move(lst);
-		if (lst->value == 0)
+		if (lst->value == 0 && lst->next)
+		{
 			lst = lst->next;
+			g_index++;
+		}
 	}
 }
 
@@ -90,6 +105,8 @@ int					main(int argc, char **argv)
 	{
 		fd = open(argv[1], O_RDONLY);
 		list = read_list(fd);
+		init(list);
+		gen_intent(list);
 		run_game(list);
 	}
 	return (0);

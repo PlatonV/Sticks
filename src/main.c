@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By:  <>                                        +#+  +:+       +#+        */
+/*   By: vplaton <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/12/20 15:03:30 by                   #+#    #+#             */
-/*   Updated: 2015/12/21 12:49:25 by vplaton          ###   ########.fr       */
+/*   Created: 2015/12/21 13:05:25 by vplaton           #+#    #+#             */
+/*   Updated: 2015/12/21 13:13:12 by vplaton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void				player_move(t_double_list *lst)
 
 	get_next_line(1, &answer);
 	choice = ft_atoi(answer);
-	while (choice  < 1 || choice > 3 || lst->value - choice < 0)
+	while (choice < 1 || choice > 3 || lst->value - choice < 0)
 	{
 		ft_putendl("Please enter a valid choice!");
 		get_next_line(1, &answer);
@@ -98,17 +98,16 @@ int					main(int argc, char **argv)
 	int				fd;
 	t_double_list	*list;
 
+	list = NULL;
 	if (argc == 1)
-	{
 		list = read_list2();
-		init(list);
-		gen_intent(list);
-		run_game(list);
-	}
 	else if (argc == 2)
 	{
 		fd = open(argv[1], O_RDONLY);
 		list = read_list(fd);
+	}
+	if (list)
+	{
 		init(list);
 		gen_intent(list);
 		run_game(list);

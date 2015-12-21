@@ -6,7 +6,7 @@
 /*   By: azaha <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/06 18:47:41 by azaha             #+#    #+#             */
-/*   Updated: 2015/12/10 16:33:41 by azaha            ###   ########.fr       */
+/*   Updated: 2015/12/21 13:15:41 by vplaton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,9 +85,5 @@ void			*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 void			ft_lstadd(t_list **alst, t_list *new);
 void			ft_putnstr(char const *s, size_t n);
 int				get_next_line(int const fd, char **line);
-
-
-/* temp */
-
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   list.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By:  <>                                        +#+  +:+       +#+        */
+/*   By: vplaton <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/12/20 15:27:20 by                   #+#    #+#             */
-/*   Updated: 2015/12/21 12:46:42 by vplaton          ###   ########.fr       */
+/*   Created: 2015/12/21 13:05:33 by vplaton           #+#    #+#             */
+/*   Updated: 2015/12/21 13:05:35 by vplaton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,7 @@ t_uint				list_size(t_double_list *lst)
 static void			put_sticks(int sticks)
 {
 	while (sticks--)
-	{
 		ft_putstr(" | ");
-	}
 }
 
 void				print_list(t_double_list *lst)

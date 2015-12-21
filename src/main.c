@@ -6,11 +6,11 @@
 /*   By:  <>                                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/20 15:03:30 by                   #+#    #+#             */
-/*   Updated: 2015/12/20 22:10:46 by                  ###   ########.fr       */
+/*   Updated: 2015/12/21 11:57:34 by vplaton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "alum.h"
+#include "alum.h"
 
 int					g_index;
 
@@ -60,7 +60,18 @@ void				player_move(t_double_list *lst)
 
 	get_next_line(1, &answer);
 	choice = ft_atoi(answer);
+	while (choice  < 1 || choice > 3 || lst->value - choice < 0)
+	{
+		ft_putendl("Please enter a valid choice!");
+		get_next_line(1, &answer);
+		choice = ft_atoi(answer);
+	}
 	lst->value -= choice;
+	if (lst->value == 0 && !lst->next)
+	{
+		ft_putendl("You lose!");
+		exit(0);
+	}
 }
 
 void				my_move(t_double_list *lst)
@@ -72,6 +83,11 @@ void				my_move(t_double_list *lst)
 	ft_putnbr(choice);
 	ft_putendl("");
 	lst->value -= choice;
+	if (lst->value == 0 && !lst->next)
+	{
+		ft_putendl("You win!");
+		exit(0);
+	}
 }
 
 void				run_game(t_double_list *lst)

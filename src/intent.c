@@ -6,11 +6,11 @@
 /*   By:  <>                                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/20 18:57:27 by                   #+#    #+#             */
-/*   Updated: 2015/12/20 22:12:05 by                  ###   ########.fr       */
+/*   Updated: 2015/12/21 11:58:39 by vplaton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include  "alum.h"
+#include "alum.h"
 
 void	init(t_double_list *lst)
 {
@@ -20,12 +20,28 @@ void	init(t_double_list *lst)
 void	gen_intent(t_double_list *ls)
 {
 	int index;
-	
-	index = 0;
-	g_intent[list_size(ls) - 1] = 0;
+
+	index = list_size(ls) - 1;
+	g_intent[index--] = 0;
 	while (ls->next)
-	{
 		ls = ls->next;
-		g_intent[index++] = (ls->value % 4 == 1);
+	while (ls->prev)
+	{
+		if (g_intent[index + 1])
+		{
+			if (ls->value % 4 == 0)
+				g_intent[index] = 1;
+			else
+				g_intent[index] = 0;
+		}
+		else
+		{
+			if (ls->value % 4 == 1)
+				g_intent[index] = 1;
+			else
+				g_intent[index] = 0;
+		}
+		ls = ls->prev;
+		index--;
 	}
 }

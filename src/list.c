@@ -6,7 +6,7 @@
 /*   By:  <>                                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/20 15:27:20 by                   #+#    #+#             */
-/*   Updated: 2015/12/20 19:33:45 by                  ###   ########.fr       */
+/*   Updated: 2015/12/21 12:46:42 by vplaton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,14 +46,25 @@ t_uint				list_size(t_double_list *lst)
 	return (result);
 }
 
+static void			put_sticks(int sticks)
+{
+	while (sticks--)
+	{
+		ft_putstr(" | ");
+	}
+}
+
 void				print_list(t_double_list *lst)
 {
+	ft_putendl("--------------------------------------");
 	while (lst->next)
 		lst = lst->next;
 	while (lst && lst->value != 0)
 	{
 		ft_putnbr(lst->value);
+		put_sticks(lst->value);
 		ft_putendl("");
 		lst = lst->prev;
 	}
+	ft_putendl("--------------------------------------");
 }

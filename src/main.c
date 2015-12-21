@@ -6,7 +6,7 @@
 /*   By:  <>                                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/20 15:03:30 by                   #+#    #+#             */
-/*   Updated: 2015/12/21 11:57:34 by vplaton          ###   ########.fr       */
+/*   Updated: 2015/12/21 12:49:25 by vplaton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,29 +14,12 @@
 
 int					g_index;
 
-t_double_list		*read_list(int fd)
-{
-	t_double_list	*result;
-	char			*str;
-
-	result = NULL;
-	while (get_next_line(fd, &str))
-	{
-		if (!result)
-			result = create_node(ft_atoi(str));
-		else
-			append_node(&result, ft_atoi(str));
-	}
-	return (result);
-}
-
 int					calculate_choice(t_double_list *lst)
 {
 	int		choice;
 
 	if (!g_intent[g_index])
 	{
-		ft_putendl("I dont want to finish ");
 		choice = lst->value % 4 - 1;
 		if (choice == -1)
 			return (3);
@@ -45,7 +28,6 @@ int					calculate_choice(t_double_list *lst)
 	}
 	else
 	{
-		ft_putendl("I want to finish ");
 		choice = lst->value % 4;
 		if (choice == 0)
 			return (1);
@@ -79,7 +61,7 @@ void				my_move(t_double_list *lst)
 	int		choice;
 
 	choice = calculate_choice(lst);
-	ft_putendl("I chose ");
+	ft_putstr("I chose ");
 	ft_putnbr(choice);
 	ft_putendl("");
 	lst->value -= choice;
@@ -94,7 +76,6 @@ void				run_game(t_double_list *lst)
 {
 	while (lst->value)
 	{
-		ft_putendl("--------------------------------------");
 		print_list(lst);
 		ft_putendl("How many sticks do you want to remove?");
 		player_move(lst);
@@ -117,7 +98,14 @@ int					main(int argc, char **argv)
 	int				fd;
 	t_double_list	*list;
 
-	if (argc == 2)
+	if (argc == 1)
+	{
+		list = read_list2();
+		init(list);
+		gen_intent(list);
+		run_game(list);
+	}
+	else if (argc == 2)
 	{
 		fd = open(argv[1], O_RDONLY);
 		list = read_list(fd);
